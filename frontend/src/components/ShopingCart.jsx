@@ -25,7 +25,7 @@ function ShopingCart() {
 
     const handleRemoveItem = async (id) => {
         try {
-            const {data} = await axios.post(`/api/v1/cart/delete/${id}`)
+            const {data} = await axios.post(`${server}/api/v1/cart/delete/${id}`)
             dispatch(setCartItems(data.cartItems))
         } catch(error) {
             toast.error(error.response.data.error || error.message)
@@ -35,7 +35,7 @@ function ShopingCart() {
 
     const handleQuantityChange = async (id, quantity) => {
         try {
-            const {data} = await axios.post(`/api/v1/cart/add/${id}`, {quantity}, {
+            const {data} = await axios.post(`${server}/api/v1/cart/add/${id}`, {quantity}, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

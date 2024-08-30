@@ -22,7 +22,7 @@ function Login() {
     // formData.append('password', password);
       try {
         setLoading(true);
-        const {data} = await axios.post(`/api/v1/user/login`, {username, password}, {
+        const {data} = await axios.post(`${server}/api/v1/user/login`, {username, password}, {
           headers: {
               'Content-Type': 'application/json'
           }
