@@ -6,6 +6,7 @@ const reviewRouter = require('./routes/review.route')
 const paymentRouter = require('./routes/payment.route')
 const cartRouter = require('./routes/cart.route')
 const orderRouter = require('./routes/order.route')
+const path = require('path')
 // const cors = require('cors')
 
 const app = express();
@@ -20,7 +21,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static("public"))
-
+app.use(express.static(path.join(__dirname, "js")));
 
 
 // routes
