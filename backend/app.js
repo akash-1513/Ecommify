@@ -21,7 +21,6 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static("public"))
-app.use(express.static(path.join(__dirname, "js")));
 
 
 // routes
@@ -32,5 +31,10 @@ app.use('/api/v1/payment', paymentRouter)
 app.use('/api/v1/cart', cartRouter)
 app.use('/api/v1/order', orderRouter)
 
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"))
+})
 
 module.exports = {app}

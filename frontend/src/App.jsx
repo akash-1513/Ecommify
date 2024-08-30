@@ -17,7 +17,7 @@ function App() {
     try {
       const {data} = await axios.get(`/api/v1/user/profile`);
       dispatch(login({userData: data.user}))
-      console.log("USer: ", data)
+      console.log("USer: ", data.user)
       return data
     } catch(error) {
       console.log("API Error: ", error.message)
