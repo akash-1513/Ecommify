@@ -11,7 +11,7 @@ const cors = require('cors')
 const app = express();
 
 app.use(cors({
-    origin: "https://ecommify-backend.onrender.com", // or an array of allowed origins
+    origin: "https://ecommify-frontend.onrender.com", // or an array of allowed origins
     methods: "GET,POST,PATCH,DELETE",
     credentials: true
 }));
