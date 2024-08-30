@@ -1,11 +1,13 @@
 import axios from 'axios'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { addToCart, deleteFromCart, resetCart } from '../store/cartSlice'
+import { addToCart, deleteFromCart, resetCart, setCartItems } from '../store/cartSlice'
 import { loadStripe } from '@stripe/stripe-js'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import Button from './Button'
+import {useQuery} from '@tanstack/react-query'
+import Loading from '../components/Loading'
 
 function ShopingCart() {
     const {cartItems, totalAmount, count} = useSelector(state => state.cart)
@@ -14,93 +16,35 @@ function ShopingCart() {
     const {status} = useSelector(state => state.auth)
     const navigate = useNavigate()
 
-    const fetchProductDetail = async (id) => {
-        try {
-            const {data} = await axios.get(`/api/v1/product/${id}`)
-            return data.productDetails
-        } catch(error) {
-            console.log("Error while fetching product Detail ")
-        }
-    }
-
-    const handleRemoveItem = (id) => {
-        dispatch(deleteFromCart(id))
-    }
-
-    const incrementQuantity = async (id, quantity) => {
-        try {
-            const newQuantity = quantity + 1
-            const productDetail = await fetchProductDetail(id)
-
-            const item = {
-                id: productDetail._id,
-                name: productDetail.name,
-                price: productDetail.price,
-                stocks: productDetail.stocks,
-                quantity: newQuantity,
-                image: productDetail.images[0].url
-            }
-
-            dispatch(addToCart({item}))
-        } catch(error) {
-            console.log(error.message)
-        }
-    }
-
-    const decrementQuantity = async (id, quantity) => {
-        try {
-            if(quantity == 1) return;
-            const newQuantity = quantity - 1
-            const productDetail = await fetchProductDetail(id)
-
-            const item = {
-                id: productDetail._id,
-                name: productDetail.name,
-                price: productDetail.price,
-                stocks: productDetail.stocks,
-                quantity: newQuantity,
-                image: productDetail.images[0].url
-            }
-
-            dispatch(addToCart({item}))
-        } catch(error) {
-            console.log(error.message)
-        }
-    }
-
-    const handleCheckout = async () => {
-
+    useEffect(() => {
         if(!status) {
             toast.warning("Login Required")
-            return navigate("/login")
+            navigate("/login") 
         }
+    }, [])
 
+    const handleRemoveItem = async (id) => {
         try {
-            setLoading(true)
-            const stripe = await loadStripe("pk_test_51Pqe9xJd5H38LgjvinTdzedoK3fQH0NnKiVICF3P6NYwgUTWY6XqsGtzzZNQBbxWoMTMvbiMh9SQ0ACFYdVNoZp700fDBIsOtb")
-            const body = {
-                products: cartItems
-            }
+            const {data} = await axios.post(`/api/v1/cart/delete/${id}`)
+            dispatch(setCartItems(data.cartItems))
+        } catch(error) {
+            toast.error(error.response.data.error || error.message)
+            console.log(error)
+        }
+    }
 
-            const response = await fetch(`/api/v1/payment/create-checkout-session`, {
-                method: "POST",
-                body: JSON.stringify(body),
+    const handleQuantityChange = async (id, quantity) => {
+        try {
+            const {data} = await axios.post(`/api/v1/cart/add/${id}`, {quantity}, {
                 headers: {
-                    "Content-Type": "application/json"
+                    'Content-Type': 'application/json'
                 }
             })
 
-            const session = await response.json()
-
-            const result = await stripe.redirectToCheckout({
-                sessionId: session.id
-            })
-            
-            setLoading(false)
-            dispatch(resetCart())
+            dispatch(setCartItems(data.cartItems))
         } catch(error) {
             toast.error(error.response.data.message || error.message)
-            setLoading(false)
+            throw error
         }
     }
     
@@ -110,11 +54,11 @@ function ShopingCart() {
             <h1 class="text-2xl font-bold mb-6">Shopping Cart</h1>
             <div class="space-y-4">
                 {/* <!-- Product Item --> */}
-                {cartItems && cartItems.map((item) => {
-                    return (<div key = {item.id} class="flex justify-between flex-col p-4 bg-gray-50 rounded-lg shadow-sm md:flex-row">
-                    <Link to = {`/products/${item.id}`}>
+                {cartItems.map((item) => {
+                    return (<div key = {item._id} class="flex justify-between flex-col p-4 bg-gray-50 rounded-lg shadow-sm md:flex-row">
+                    <Link to = {`/products/${item._id}`}>
                         <div class="flex items-center space-x-4">
-                            <img src={item.image} alt="Product Image" class="w-20 h-20 object-cover rounded" />
+                            <img src={item.images[0]?.url} alt="Product Image" class="w-20 h-20 object-cover rounded" />
                             <div>
                                 <h2 class="text-lg font-semibold">{item.name}</h2>
                                 <p class="text-gray-500">₹{item.price} x {item.quantity} = ₹{item.price * item.quantity}</p>
@@ -123,11 +67,11 @@ function ShopingCart() {
                     </Link>
                     <div class="flex items-center space-x-4 mt-4">
                         <div class="flex items-center border rounded-lg overflow-hidden">
-                            <button class="px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={() => decrementQuantity(item.id, item.quantity)}>-</button>
-                            <input type="text" class="w-12 text-center border-t border-b border-gray-300" value={item.quantity} readonly />
-                            <button class="px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={() => incrementQuantity(item.id, item.quantity)}>+</button>
+                            <button class="px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={() => handleQuantityChange(item._id, (item.quantity > 1) ? item.quantity - 1 : item.quantity)}>-</button>
+                            <input type="text" class="w-12 text-center border-t border-b border-gray-300" value={item.quantity} readOnly />
+                            <button class="px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={() => handleQuantityChange(item._id, (item.quantity < item.stocks) ? item.quantity + 1 : item.quantity)}>+</button>
                         </div>
-                        <button class="px-4 py-2 bg-red-700 text-white hover:opacity-90" onClick = {() => handleRemoveItem(item.id)}>Remove</button>
+                        <button class="px-4 py-2 bg-red-700 text-white hover:opacity-90" onClick = {() => handleRemoveItem(item._id)}>Remove</button>
                     </div>
                 </div>)
                 })}
@@ -139,8 +83,8 @@ function ShopingCart() {
                     <h2 className='text-xl'>₹{totalAmount}</h2>
                 </div>
                 <div>
-                <button onClick = {handleCheckout} className={`flex font-semibold justify-center items-center text-white rounded-md shadow-sm hover:opacity-90 ${loading ? 'opacity-90' : ''} bg-gradient-to-tr from-gray-900 to-gray-800 py-3 px-6 text-center align-middle text-[15px] uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none `}>
-                    {!loading ? "Place Order" : <img className = "w-11 px-2 text-center" src = "https://cdn.pixabay.com/animation/2023/05/02/04/29/04-29-06-428_512.gif"></img>}
+                <button onClick = {() => navigate("/address")} className={`flex font-semibold justify-center items-center text-white rounded-md shadow-sm hover:opacity-90 ${loading ? 'opacity-90' : ''} bg-gradient-to-tr from-gray-900 to-gray-800 py-3 px-6 text-center align-middle text-[15px] uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none `}>
+                    Place Order
                   </button>
                 </div>
             </div>

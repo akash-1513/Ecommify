@@ -17,10 +17,10 @@ function Header() {
   }, [path])
 
   return (
-    <nav className='p-3 flex flex-col justify-center shadow-sm bg-gray-100 gap-5'>
+    <nav className='p-3 flex flex-col justify-center shadow-sm gap-5'>
       <div className='flex justify-between items-center'>
         <Link to = "/" className='flex gap-2 items-center'>
-          <img className='object-cover max-w-16 max-h-16' src="" alt="" />
+          <img className='object-cover max-w-16 max-h-16' src="https://i.pinimg.com/originals/66/f7/72/66f77296282b5ab7c2780724802614c0.png" alt="" />
           <span className='text-xl drop-shadow-md font-bold font-display md:text-2xl'>eCommify</span>
         </Link>
         <div id = "nav-menu" className='hidden md:flex gap-12 text-'>
@@ -94,7 +94,7 @@ function Header() {
             </Link>
             <Link to = "/cart" className='relative'>
                 <i className="fa-solid text-green-600 fa-bag-shopping fa-solid text-2xl md:text-3xl hover:opacity-90"></i>
-                <span className='absolute top-4 left-4 bg-red-600 text-white px-2 rounded-full flex justify-center items-center md:left-5'>{count}</span>
+                {/* <span className='absolute top-4 left-4 bg-red-600 text-white px-2 rounded-full flex justify-center items-center md:left-5'>{count}</span> */}
             </Link>
             {/* Todo show avatar button */}
           </div>)}

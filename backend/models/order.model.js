@@ -1,4 +1,4 @@
-const {Schema, model, mongo} = require('mongoose')
+const {Schema, model} = require('mongoose')
 
 const orderSchema = new Schema({
     shippingInfo: {
@@ -18,25 +18,44 @@ const orderSchema = new Schema({
             type: String,
             required: true
         },
-        pincode: {
-            type: Number,
-            required: true
-        },
         phone: {
             type: Number,
             required: true,
         }
     },
-    orderItems: [
+    cartItems: [
         {   
-            productId: {
+            _id: {
                 type: Schema.Types.ObjectId,
                 ref: "Product"
             },
+            name: {
+                type: String,
+                required: true
+            },
+            images: [
+                {
+                    public_id: {
+                        type: String,
+                        required: true
+                    },
+                    url: {
+                        type: String, // cloudinary
+                        required: true,
+                    }
+                }
+            ],
+            price: {
+                type: Number,
+                required: true
+            },
             quantity: {
                 type: Number,
-                required: true,
-                default: 1
+                required: true
+            },
+            stocks: {
+                type: Number,
+                required: true
             }
         }
     ],
@@ -50,11 +69,13 @@ const orderSchema = new Schema({
     },
     orderStatus: {
         type: String,
-        required: true,
         default: "Processing"
     },
+    paymentStatus: {
+        type: String,
+        default: "Paid" 
+    },
     deliveredAt: Date
-
     // payment System on hold
 }, {timestamps: true})
 

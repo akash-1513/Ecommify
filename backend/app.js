@@ -4,6 +4,8 @@ const productRouter = require('./routes/product.route')
 const userRouter = require('./routes/user.route')
 const reviewRouter = require('./routes/review.route')
 const paymentRouter = require('./routes/payment.route')
+const cartRouter = require('./routes/cart.route')
+const orderRouter = require('./routes/order.route')
 // const cors = require('cors')
 
 const app = express();
@@ -25,5 +27,8 @@ app.use('/api/v1/product', productRouter)
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/review', reviewRouter)
 app.use('/api/v1/payment', paymentRouter)
+app.use('/api/v1/cart', cartRouter)
+app.use('/api/v1/order', orderRouter)
+
 
 module.exports = {app}

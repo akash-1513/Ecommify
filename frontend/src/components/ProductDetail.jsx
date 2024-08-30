@@ -5,7 +5,7 @@ import ReviewCard from './ReviewCard';
 import ReactStars from 'react-stars';
 import {useDispatch, useSelector} from 'react-redux'
 import Loading from './Loading';
-import { addToCart } from '../store/cartSlice';
+import { setCartItems } from '../store/cartSlice';
 import {toast} from 'sonner'
 import AddReview from './AddReview';
 import { setSingleProductData } from '../store/singleProductSlice';
@@ -44,17 +44,25 @@ function ProductDetail() {
         }
     }
 
-    const handleAddToCart = () => {
-        const item = {
-            id: productInfo?._id,
-            image: productInfo?.images[0]?.url,
-            name: productInfo?.name,
-            price: productInfo?.price,
-            stocks: productInfo?.stocks,
-            quantity,
+    const handleAddToCart = async () => {
+        try {
+
+            const {data} = await axios.post(`/api/v1/cart/add/${productId}`, {
+                quantity
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            dispatch(setCartItems(data?.cartItems))
+
+            toast.success("Item Added To Cart")
+        } catch(error) {
+            console.log(error)
+            toast.error(error.response.data.message || error.message)
         }
-        dispatch(addToCart({item}))
-        toast.success("Item Added To Cart")
+        
     }
 
     const {isLoading} = useQuery({

@@ -2,23 +2,26 @@ import React, {memo} from 'react'
 import ReactStars from 'react-stars'
 import {Link} from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { addToCart } from '../store/cartSlice'
+import { addToCart, setCartItems } from '../store/cartSlice'
 import { toast } from 'sonner'
+import axios from 'axios'
 
 function Product({product}) {
   const dispatch = useDispatch()
 
-  const handleAddToCart = () => {
-    const item = {
-      id: product?._id,
-      image: product?.images[0]?.url,
-      name: product?.name,
-      price: product?.price,
-      stocks: product?.stocks,
-      quantity: 1
+  const handleAddToCart = async () => {
+    try {
+      const {data} = await axios.post(`/api/v1/cart/add/${product?._id}`, {quantity: 1}, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      dispatch(setCartItems(data.cartItems))
+      toast.success("Item added to cart")
+    } catch(error) {
+      toast.error(error.response.data.message || error.message)
     }
-    dispatch(addToCart({item}))
-    toast.success("Item Added To Cart")
   }
   
   return (
