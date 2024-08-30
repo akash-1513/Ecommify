@@ -34,6 +34,7 @@ function ProductPage() {
             const {data} = await axios.get(`/api/v1/product/?search=${debounceValue}&page=${page}&limit=${limit}&category=${category}&sort=${sortByQuery}`)
             dispatch(setProductData({products: data.products, productsCount: data.productsCount}))
             setCategoryList(data.categories)
+            console.log(data)
             return data
         } catch(error) {
             toast.error(error.response.data.message || error.message)
