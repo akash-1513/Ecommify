@@ -19,7 +19,7 @@ function Signup() {
 
     try {
       setLoading(true)
-      await axios.post(`${server}/api/v1/user/register`, {
+      await axios.post(`/api/v1/user/register`, {
         fullName, username, email, password, avatar: file
       }, {
         headers: {
