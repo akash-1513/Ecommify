@@ -13,10 +13,12 @@ function AddReview({productId}) {
     const [description, setDescription] = useState("")
     const dispatch = useDispatch()
 
+    const server = "https://ecommify-backend.onrender.com";
+
     const submitReview = async (e) => {
         e.preventDefault()
         try {
-            const {data} = await axios.post(`/api/v1/review/${productId}`, {rating, description}, {
+            const {data} = await axios.post(`${server}/api/v1/review/${productId}`, {rating, description}, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

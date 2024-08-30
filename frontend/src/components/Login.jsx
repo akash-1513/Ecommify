@@ -13,6 +13,7 @@ function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
+  const server = "https://ecommify-backend.onrender.com"
 
   const handleLogin = async (e) => {
     e.preventDefault() // Create FormData object
@@ -21,7 +22,7 @@ function Login() {
     // formData.append('password', password);
       try {
         setLoading(true);
-        const {data} = await axios.post('/api/v1/user/login', {username, password}, {
+        const {data} = await axios.post(`${server}/api/v1/user/login`, {username, password}, {
           headers: {
               'Content-Type': 'application/json'
           }

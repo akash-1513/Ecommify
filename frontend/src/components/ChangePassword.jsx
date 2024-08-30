@@ -9,12 +9,13 @@ function ChangePassword() {
     const [newPassword, setNewPassword] = useState("")
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
+    const server = "https://ecommify-backend.onrender.com";
 
     const handleChangePassword = async (e) => {
         e.preventDefault()
         try {
             setLoading(true)
-            await axios.put('/api/v1/user/change-password', {oldPassword, newPassword}, {
+            await axios.put(`${server}/api/v1/user/change-password`, {oldPassword, newPassword}, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

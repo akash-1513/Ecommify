@@ -12,13 +12,14 @@ function Signup() {
   const [file, setFile] = useState(null)
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
+  const server = "https://ecommify-backend.onrender.com"
 
   const handleSignup = async (e) => {
     e.preventDefault()
 
     try {
       setLoading(true)
-      await axios.post("/api/v1/user/register", {
+      await axios.post(`${server}/api/v1/user/register`, {
         fullName, username, email, password, avatar: file
       }, {
         headers: {

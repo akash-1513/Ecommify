@@ -7,6 +7,7 @@ import { toast } from 'sonner'
 
 function AvatarDropdown() { 
 
+    const server = "https://ecommify-backend.onrender.com"
     const [showMenu, setShowMenu] = useState(false)
     const {userData} = useSelector(state => state.auth)
     const dispatch = useDispatch()
@@ -15,7 +16,7 @@ function AvatarDropdown() {
 
     const handleLogout = async () => {
         try {
-            await axios.post("/api/v1/user/logout")
+            await axios.post(`${server}/api/v1/user/logout`)
             dispatch(logout())
             navigate("/login")
         } catch(error) {
