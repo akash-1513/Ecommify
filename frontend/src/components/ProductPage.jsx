@@ -8,7 +8,6 @@ import { toast } from 'sonner'
 import { useQuery } from '@tanstack/react-query'
 import Dropdown from './Dropdown'
 import Search from './Search'
-import { Slider } from "@material-tailwind/react";
 import useDebounce from '../hooks/useDebounce'
 
 function ProductPage() {
@@ -59,7 +58,7 @@ function ProductPage() {
         {!isLoading ? <div className='mt-10'>
                 <div className='flex justify-center flex-wrap gap-5'>
                     {
-                        products.map((product) => {
+                        products?.map((product) => {
                             return <Product key = {product._id} product = {product} />
                         })
                     }
