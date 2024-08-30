@@ -17,7 +17,7 @@ function Header() {
   }, [path])
 
   return (
-    <nav className='p-3 flex flex-col justify-center shadow-sm gap-5'>
+    <nav className='py-3 px-6 flex flex-col justify-center shadow-sm gap-5'>
       <div className='flex justify-between items-center'>
         <Link to = "/" className='flex gap-2 items-center'>
           {/* <img className='object-cover max-w-16 max-h-16' src="https://i.pinimg.com/originals/66/f7/72/66f77296282b5ab7c2780724802614c0.png" alt="" /> */}
@@ -64,7 +64,7 @@ function Header() {
         <i className="fa-solid fa-bars"></i>
         </button>}
       </div>
-      <div className = {`bg-white fixed inset-0 p-3 z-50 md:hidden ${!showMenu ? "hidden" : ""}`}>
+      <div className = {`bg-white fixed inset-0 p-6 z-50 md:hidden ${!showMenu ? "hidden" : ""}`}>
         <div id = "nav-menu" className='flex justify-between '>
           <Link to = "/" className='flex gap-2 items-center'>
             <img className='object-cover max-w-12 max-h-12 ' src="" alt="" />

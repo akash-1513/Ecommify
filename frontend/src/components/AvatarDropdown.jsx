@@ -41,7 +41,7 @@ function AvatarDropdown() {
             <div className={`bg-white p-4 w-44 z-40 shadow-lg absolute -left-36 top-16 ${showMenu ? "" : "hidden"}`}>
                 <ul className='flex flex-col gap-1'>
                     <Link to = "/profile"><li className='p-1 hover:bg-gray-200'>Profile</li></Link>
-                    <li className='p-1 hover:bg-gray-200'><Link to = "/profile">Orders</Link></li>
+                    <li className='p-1 hover:bg-gray-200'><Link to = "/orders">Orders</Link></li>
                     <li className=''><button className = "bg-red-700 hover:opacity-90 text-white rounded-md p-1 w-full cursor-pointer" onClick = {handleLogout}>Logout</button></li>
                 </ul> 
             </div>
