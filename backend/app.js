@@ -11,7 +11,7 @@ const orderRouter = require('./routes/order.route')
 const app = express();
 
 // app.use(cors({
-//     origin: "http://localhost:5173",
+//     origin: "*",
 //     methods:"GET,POST,PATCH,DELETE",
 //     credentials: true
 // }))
