@@ -12,7 +12,7 @@ function Product({product}) {
 
   const handleAddToCart = async () => {
     try {
-      const {data} = await axios.post(`${server}/api/v1/cart/add/${product?._id}`, {quantity: 1}, {
+      const {data} = await axios.post(`/api/v1/cart/add/${product?._id}`, {quantity: 1}, {
         headers: {
           'Content-Type': 'application/json'
         }

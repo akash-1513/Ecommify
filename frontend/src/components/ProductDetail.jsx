@@ -22,7 +22,7 @@ function ProductDetail() {
     const getProductDetails = async () => {
         try {
             // setLoading(true)
-            const {data} = await axios.get(`${server}/api/v1/product/${productId}`)
+            const {data} = await axios.get(`/api/v1/product/${productId}`)
             const productInfo = {
                 _id: data?.productDetails._id,
                 name: data?.productDetails.name,
@@ -48,7 +48,7 @@ function ProductDetail() {
     const handleAddToCart = async () => {
         try {
 
-            const {data} = await axios.post(`${server}/api/v1/cart/add/${productId}`, {
+            const {data} = await axios.post(`/api/v1/cart/add/${productId}`, {
                 quantity
             }, {
                 headers: {

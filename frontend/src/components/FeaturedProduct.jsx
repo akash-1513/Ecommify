@@ -10,7 +10,7 @@ function FeaturedProduct() {
 
     const fetchData = async () => {
         try {
-            const {data} = await axios.get(`${server}/api/v1/product/?page=1&limit=5`)
+            const {data} = await axios.get(`/api/v1/product/?page=1&limit=5`)
             return data?.products
         } catch(error) {
             throw error

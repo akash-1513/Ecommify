@@ -32,7 +32,7 @@ function ProductPage() {
             } else {
                 sortByQuery = "rating"
             }
-            const {data} = await axios.get(`${server}/api/v1/product/?search=${debounceValue}&page=${page}&limit=${limit}&category=${category}&sort=${sortByQuery}`)
+            const {data} = await axios.get(`/api/v1/product/?search=${debounceValue}&page=${page}&limit=${limit}&category=${category}&sort=${sortByQuery}`)
             dispatch(setProductData({products: data.products, productsCount: data.productsCount}))
             setCategoryList(data.categories)
             console.log(data)

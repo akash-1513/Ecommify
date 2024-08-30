@@ -16,9 +16,10 @@ function AvatarDropdown() {
 
     const handleLogout = async () => {
         try {
-            await axios.post(`${server}/api/v1/user/logout`)
+            await axios.post(`/api/v1/user/logout`)
             dispatch(logout())
             navigate("/login")
+            toast.success("logged out successfully")
         } catch(error) {
             // Todo react toast
             toast.error(error.response.data.message || error.message)

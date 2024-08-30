@@ -1,6 +1,7 @@
 const {User} = require('../models/user.model')
 const jwt = require('jsonwebtoken')
 const verifyJWT = async (req, res, next) => {
+    console.log(req);
     try {
         const token = req.cookies?.accessToken || req.headers["authorization"]?.split("Bearer ")[1];
         if(!token) {
@@ -18,6 +19,7 @@ const verifyJWT = async (req, res, next) => {
         req.user = user;
         next()
     } catch(error) {
+        console.log("Error : verifyJWT")
         return res.status(401).json({message: "Please Login to access token", error: error.message});
     }
 }
