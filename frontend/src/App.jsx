@@ -9,6 +9,7 @@ import {Toaster} from 'sonner'
 import { useQuery } from "@tanstack/react-query"
 import { setCartItems } from "./store/cartSlice"
 import { setUserOrders } from "./store/orderSlice"
+import { getAllCartItems } from "../../backend/controllers/cart.controller"
 
 function App() {
   const server = "https://ecommify-backend.onrender.com"
@@ -41,24 +42,32 @@ function App() {
       throw error
     }
   }
-  // useEffect(() => {
-  //   getCurrentUser()
-  // }, [])
+  useEffect(() => {
+    getCurrentUser()
+  }, [])
 
-  useQuery({
-    queryKey: ["orders"],
-    queryFn: getAllUserOrders
-  })
+  // useQuery({
+  //   queryKey: ["orders"],
+  //   queryFn: getAllUserOrders
+  // })
 
-  useQuery({
-    queryKey: ["userInfo"],
-    queryFn: getCurrentUser
-  })
+  useEffect(() => {
+    getAllCartItems()
+  }, [])
 
-  useQuery({
-    queryKey: ["cartItems"],
-    queryFn: getCartDetails
-  })
+  useEffect(() => {
+    getAllUserOrders()
+  }, [])
+
+  // useQuery({
+  //   queryKey: ["userInfo"],
+  //   queryFn: getCurrentUser
+  // })
+
+  // useQuery({
+  //   queryKey: ["cartItems"],
+  //   queryFn: getCartDetails
+  // })
 
 
 
