@@ -41,32 +41,22 @@ function App() {
       throw error
     }
   }
-  useEffect(() => {
-    getCurrentUser()
-  }, [])
+  
 
-  // useQuery({
-  //   queryKey: ["orders"],
-  //   queryFn: getAllUserOrders
-  // })
+  useQuery({
+    queryKey: ["orders"],
+    queryFn: getAllUserOrders
+  })
 
-  useEffect(() => {
-    getCartDetails()
-  }, [])
+  useQuery({
+    queryKey: ["userInfo"],
+    queryFn: getCurrentUser
+  })
 
-  useEffect(() => {
-    getAllUserOrders()
-  }, [])
-
-  // useQuery({
-  //   queryKey: ["userInfo"],
-  //   queryFn: getCurrentUser
-  // })
-
-  // useQuery({
-  //   queryKey: ["cartItems"],
-  //   queryFn: getCartDetails
-  // })
+  useQuery({
+    queryKey: ["cartItems"],
+    queryFn: getCartDetails
+  })
 
 
 

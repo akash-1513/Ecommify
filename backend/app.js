@@ -17,8 +17,6 @@ const app = express();
 //     credentials: true
 // }));
 
-app.disable('etag');
-
 app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({extended: true}))
@@ -32,12 +30,6 @@ app.use('/api/v1/review', reviewRouter)
 app.use('/api/v1/payment', paymentRouter)
 app.use('/api/v1/cart', cartRouter)
 app.use('/api/v1/order', orderRouter)
-
-
-app.use(express.static(path.join(__dirname, "../frontend/dist")))
-app.get("*", (req, res) => {
-    res.sendFile(path.resolve("../frontend/dist/index.html"))
-})
 
 
 module.exports = {app}

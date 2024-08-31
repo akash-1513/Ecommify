@@ -25,6 +25,8 @@ function AddReview({productId}) {
             })
             
             dispatch(addReview({review: data.review, userData}))
+            setDescription("")
+            setRating(0)
             toast.success(data.message)
         } catch(error) {
             
@@ -36,7 +38,7 @@ function AddReview({productId}) {
         <div class="bg-white p-6 rounded-lg shadow-lg w-full">
             <div class="mb-4">
                 <label for="review-description" class="block text-sm font-medium text-gray-700 mb-2">Review Description</label>
-                <textarea value = {description} onChange = {(e) => setDescription(e.target.value)} id="review-description" rows="4" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Write your review here...(Optional)"></textarea>
+                <textarea value = {description} onChange = {(e) => setDescription(e.target.value)} id="review-description" rows="4" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Write your review here..."></textarea>
             </div>
 
             <div class="mb-4">
