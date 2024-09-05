@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     host: true,
     proxy: {
-      "/api/v1": "https://ecommify-backend.onrender.com",
+      "/api/v1": "https://ecommify-h6wg.onrender.com",
     }
   },
   plugins: [react()]
