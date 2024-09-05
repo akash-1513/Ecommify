@@ -26,6 +26,7 @@ function Login() {
           headers: {
               'Content-Type': 'application/json',
           },
+          withCredentials: true
         });
         setLoading(false)
         dispatch(login({userData: data.user}))
