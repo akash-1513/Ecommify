@@ -11,7 +11,7 @@ import { setCartItems } from "./store/cartSlice"
 import { setUserOrders } from "./store/orderSlice"
 
 function App() {
-  const server = "https://ecommify-backend.onrender.com"
+  const server = "https://ecommify-aka9.onrender.com"
   const dispatch = useDispatch()
   const getCurrentUser = async () => {
     try {

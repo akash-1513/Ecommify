@@ -7,7 +7,7 @@ import { toast } from 'sonner'
 
 function AvatarDropdown() { 
 
-    const server = "https://ecommify-backend.onrender.com"
+    const server = "https://ecommify-aka9.onrender.com"
     const [showMenu, setShowMenu] = useState(false)
     const {userData} = useSelector(state => state.auth)
     const dispatch = useDispatch()

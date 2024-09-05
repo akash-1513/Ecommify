@@ -14,7 +14,7 @@ function ShopingCart() {
     const [loading, setLoading] = useState(false)
     const {status} = useSelector(state => state.auth)
     const navigate = useNavigate()
-    const server = "https://ecommify-backend.onrender.com"
+    const server = "https://ecommify-aka9.onrender.com"
 
     useEffect(() => {
         if(!status) {

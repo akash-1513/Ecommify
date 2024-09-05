@@ -13,7 +13,7 @@ function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
-  const server = "https://ecommify-backend.onrender.com"
+  const server = "https://ecommify-aka9.onrender.com"
 
   const handleLogin = async (e) => {
     e.preventDefault() // Create FormData object

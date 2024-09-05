@@ -16,7 +16,7 @@ function UpdateProfile() {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [file, setFile] = useState(null)
-  const server = "https://ecommify-backend.onrender.com"
+  const server = "https://ecommify-aka9.onrender.com"
 
 
   const handleUpdateUser = async (e) => {

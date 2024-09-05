@@ -9,7 +9,7 @@ function ChangePassword() {
     const [newPassword, setNewPassword] = useState("")
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
-    const server = "https://ecommify-backend.onrender.com";
+    const server = "https://ecommify-aka9.onrender.com";
 
     const handleChangePassword = async (e) => {
         e.preventDefault()

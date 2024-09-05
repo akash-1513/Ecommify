@@ -14,7 +14,7 @@ function Payment() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const server = "https://ecommify-backend.onrender.com"
+    const server = "https://ecommify-aka9.onrender.com"
 
     const createOrder = async () => {
         try {

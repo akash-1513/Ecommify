@@ -20,7 +20,7 @@ function ProductPage() {
     const [sortBy, setSortBy] = useState("Popularity")
     const [category, setCategory] = useState("All")
     const [categoryList, setCategoryList] = useState([])
-    const server = "https://ecommify-backend.onrender.com"
+    const server = "https://ecommify-aka9.onrender.com"
 
     const fetchData = async () => {
         try {

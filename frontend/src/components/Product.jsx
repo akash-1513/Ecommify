@@ -8,7 +8,7 @@ import axios from 'axios'
 
 function Product({product}) {
   const dispatch = useDispatch()
-  const server = "https://ecommify-backend.onrender.com"
+  const server = "https://ecommify-aka9.onrender.com"
 
   const handleAddToCart = async () => {
     try {

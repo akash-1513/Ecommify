@@ -17,7 +17,7 @@ function ProductDetail() {
     const {productId} = useParams()
     const dispatch = useDispatch()
     const {productInfo, reviews, avgRating} = useSelector(state => state.singleProduct)
-    const server = "https://ecommify-backend.onrender.com"
+    const server = "https://ecommify-aka9.onrender.com"
 
     const getProductDetails = async () => {
         try {

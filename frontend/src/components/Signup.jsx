@@ -12,7 +12,7 @@ function Signup() {
   const [file, setFile] = useState(null)
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
-  const server = "https://ecommify-backend.onrender.com"
+  const server = "https://ecommify-aka9.onrender.com"
 
   const handleSignup = async (e) => {
     e.preventDefault()
