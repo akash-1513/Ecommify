@@ -77,7 +77,6 @@ const loginUser = asyncHandler(async(req, res) => {
     const options = {
         httpOnly: true,
         secure: true,
-        sameSite: 'none',
     }
 
     res.status(200).cookie("accessToken", accessToken, options).cookie("refreshToken", refreshToken, options).json({message: "User logged in successfully", user, refreshToken, accessToken})
@@ -93,7 +92,6 @@ const logoutUser = asyncHandler(async(req, res) => {
     const options = {
         httpOnly: true,
         secure:  true,
-        sameSite: 'none',
     }
     
     return res.status(200).clearCookie("accessToken", options).clearCookie("refreshToken", options).json({message: "User logged out successfully"});

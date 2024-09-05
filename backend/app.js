@@ -18,7 +18,7 @@ const app = express();
 
 app.use(cors({
     origin: "https://ecommify-frontend.onrender.com",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    methods: ["GET","HEAD","PUT","PATCH","POST","DELETE"],
     credentials: true
 }))
 
