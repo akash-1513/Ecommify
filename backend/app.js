@@ -7,15 +7,11 @@ const paymentRouter = require('./routes/payment.route')
 const cartRouter = require('./routes/cart.route')
 const orderRouter = require('./routes/order.route')
 const path = require('path')
-// const cors = require('cors')
+const cors = require('cors')
 
 const app = express();
 
-// app.use(cors({
-//     origin: "https://ecommify-frontend.onrender.com", // or an array of allowed origins
-//     methods: "GET,POST,PATCH,DELETE",
-//     credentials: true
-// }));
+app.use(cors({ origin: 'https://ecommify-frontend.onrender.com' }));
 
 app.use(express.json())
 app.use(cookieParser())
