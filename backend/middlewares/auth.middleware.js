@@ -3,9 +3,9 @@ const jwt = require('jsonwebtoken')
 const verifyJWT = async (req, res, next) => {
     // console.log(req);
     try {
-        const token = req.cookies?.accessToken || req.headers["authorization"]?.split("Bearer ")[1];
+        const token = req.cookies?.accessToken;
         if(!token) {
-            return res.status(401).json({message: "Please Login to access resource"});
+            return res.status(401).json({message: `Please Login to access resource ${token}`});
         }
 
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
