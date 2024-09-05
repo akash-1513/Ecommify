@@ -32,7 +32,7 @@ function Login() {
         navigate("/")
         toast.success("Logged in successfully")
     } catch(error) {
-      toast.error(error.response.data.message || error.message)
+      toast.error(error.message)
       setLoading(false)
     }
   }
