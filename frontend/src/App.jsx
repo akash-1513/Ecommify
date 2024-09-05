@@ -15,7 +15,7 @@ function App() {
   const dispatch = useDispatch()
   const getCurrentUser = async () => {
     try {
-      const {data} = await axios.get(`/api/v1/user/profile`);
+      const {data} = await axios.get(`${server}/api/v1/user/profile`);
       dispatch(login({userData: data.user}))
       console.log("USer: ", data.user)
       return data
@@ -26,14 +26,14 @@ function App() {
   }
 
   const getCartDetails = async () => {
-    const {data} = await axios.get(`/api/v1/cart`);
+    const {data} = await axios.get(`${server}/api/v1/cart`);
     dispatch(setCartItems(data?.cartItems))
     return data.cartItems
   }
 
   const getAllUserOrders = async () => {
     try {
-      const {data: {orders}} = await axios.get(`/api/v1/order/`)
+      const {data: {orders}} = await axios.get(`${server}/api/v1/order/`)
       console.log("Orders: ", orders)
       dispatch(setUserOrders({orders}))
       return orders

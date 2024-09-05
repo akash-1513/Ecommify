@@ -23,7 +23,7 @@ function UpdateProfile() {
     e.preventDefault()
     try {
       setLoading(true)
-      const {data} = await axios.put(`/api/v1/user/update`, {
+      const {data} = await axios.put(`${server}/api/v1/user/update`, {
         fullName, username, email, avatar: file
       }, {
         headers: {

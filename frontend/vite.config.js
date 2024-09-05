@@ -5,9 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   server: {
     host: true,
-    proxy: {
-      "/api/v1": "https://ecommify-h6wg.onrender.com",
-    }
   },
   plugins: [react()]
 })

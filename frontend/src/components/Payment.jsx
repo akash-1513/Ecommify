@@ -19,7 +19,7 @@ function Payment() {
     const createOrder = async () => {
         try {
             const order = {cartItems, totalAmount, shippingInfo: {address, state, city, phone, country}}
-            const {data: {createdOrder}} = await axios.post(`/api/v1/order/create`, {order: JSON.stringify(order)}, {
+            const {data: {createdOrder}} = await axios.post(`${server}/api/v1/order/create`, {order: JSON.stringify(order)}, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -38,7 +38,7 @@ function Payment() {
             currency: 'INR',
         }
 
-        const {data: {order}} = await axios.post(`/api/v1/payment/create-checkout-session`, {
+        const {data: {order}} = await axios.post(`${server}/api/v1/payment/create-checkout-session`, {
             options: JSON.stringify(details)
         }, {
             headers: {
@@ -56,7 +56,7 @@ function Payment() {
             handler: async (res) => {
                 const paymentInfo = {...res}
 
-                const {data} = await axios.post(`/api/v1/payment/validate`, {
+                const {data} = await axios.post(`${server}/api/v1/payment/validate`, {
                     paymentInfo: JSON.stringify(paymentInfo)
                 }, {
                     headers: {
