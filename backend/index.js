@@ -4,6 +4,11 @@ const { connectDB } = require('./db')
 
 const PORT = 8000 || process.env.PORT
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('../frontend/dist'));
+}
+
+
 connectDB()
 .then(() => {
     app.listen(PORT, () => {

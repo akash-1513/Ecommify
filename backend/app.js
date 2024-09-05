@@ -22,7 +22,6 @@ app.use(cookieParser())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static("public"))
 
-
 // routes
 app.use('/api/v1/product', productRouter)
 app.use('/api/v1/user', userRouter)
