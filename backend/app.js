@@ -11,10 +11,16 @@ const cors = require('cors')
 
 const app = express();
 
-app.options('*', cors({
-    origin: 'https://ecommify-frontend.onrender.com',
+// app.options('*', cors({
+//     origin: 'https://ecommify-frontend.onrender.com',
+//     credentials: true,
+// }));
+
+app.use(cors({
+    origin: "https://ecommify-frontend.onrender.com",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
-}));
+}))
 
 app.use(express.json())
 app.use(cookieParser())
