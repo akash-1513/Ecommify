@@ -24,8 +24,9 @@ function Login() {
         setLoading(true);
         const {data} = await axios.post(`${server}/api/v1/user/login`, {username, password}, {
           headers: {
-              'Content-Type': 'application/json'
-          }
+              'Content-Type': 'application/json',
+          },
+          withCredentials: true
         });
         setLoading(false)
         dispatch(login({userData: data.user}))
