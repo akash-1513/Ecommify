@@ -75,7 +75,6 @@ const loginUser = asyncHandler(async(req, res) => {
     const {accessToken, refreshToken} = await generateAccessRefreshToken(user._id);
 
     const options = {
-        httpOnly: true,
         secure: true,
         sameSite: 'none'
     }
