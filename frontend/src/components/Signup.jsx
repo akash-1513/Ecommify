@@ -58,10 +58,10 @@ function Signup() {
                 </div>
                 <div className='mt-3'>
                     <label htmlFor='password' className='block text-base mb-2 text-gray-700'>Password</label>
-                    <input value = {password} onChange={(e) => setPassword(e.target.value)} type="text" id = "password" className='border w-full text-base px-2 py-1 focus:outline-none focus:border-gray-600 rounded-md' placeholder='Password'/>
+                    <input value = {password} onChange={(e) => setPassword(e.target.value)} type="password" id = "password" className='border w-full text-base px-2 py-1 focus:outline-none focus:border-gray-600 rounded-md' placeholder='Password'/>
                 </div>
                 <div className='mt-3'>
-                    <label htmlFor='avatar' className='block text-base mb-2 text-gray-700'>Avatar</label>
+                    <label htmlFor='avatar' className='block text-base mb-2 text-gray-700'>Avatar <span>(Optional)</span></label>
                     <input onChange = {(e) => setFile(e.target.files[0])} type="file" id = "avatar" className='border w-full text-base px-2 py-1 focus:outline-none focus:border-gray-600 rounded-md'/>
                 </div>
                 <div className='mt-4 flex flex-col'>
