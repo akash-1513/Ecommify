@@ -15,7 +15,8 @@ function Product({product}) {
       const {data} = await axios.post(`${server}/api/v1/cart/add/${product?._id}`, {quantity: 1}, {
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        withCredentials: true
       })
 
       dispatch(setCartItems(data.cartItems))
