@@ -25,7 +25,9 @@ function ShopingCart() {
 
     const handleRemoveItem = async (id) => {
         try {
-            const {data} = await axios.post(`${server}/api/v1/cart/delete/${id}`)
+            const {data} = await axios.post(`${server}/api/v1/cart/delete/${id}`, {}, {
+                withCredentials: true
+            })
             dispatch(setCartItems(data.cartItems))
         } catch(error) {
             toast.error(error.response.data.error || error.message)
