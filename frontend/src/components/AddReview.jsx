@@ -21,7 +21,8 @@ function AddReview({productId}) {
             const {data} = await axios.post(`${server}/api/v1/review/${productId}`, {rating, description}, {
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                withCredentials: true
             })
             
             dispatch(addReview({review: data.review, userData}))

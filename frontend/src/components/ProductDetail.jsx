@@ -53,7 +53,8 @@ function ProductDetail() {
             }, {
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                withCredentials: true
             })
 
             dispatch(setCartItems(data?.cartItems))

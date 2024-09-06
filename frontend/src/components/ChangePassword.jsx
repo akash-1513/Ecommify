@@ -18,7 +18,8 @@ function ChangePassword() {
             await axios.put(`${server}/api/v1/user/change-password`, {oldPassword, newPassword}, {
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                withCredentials: true
             });
             setLoading(false)
             navigate("/profile")

@@ -38,7 +38,8 @@ function ShopingCart() {
             const {data} = await axios.post(`${server}/api/v1/cart/add/${id}`, {quantity}, {
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                withCredentials: true
             })
 
             dispatch(setCartItems(data.cartItems))

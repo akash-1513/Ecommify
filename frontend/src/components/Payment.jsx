@@ -22,7 +22,8 @@ function Payment() {
             const {data: {createdOrder}} = await axios.post(`${server}/api/v1/order/create`, {order: JSON.stringify(order)}, {
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                withCredentials: true
             })
 
             dispatch(addOrder({orderDetail: createdOrder}))
@@ -43,7 +44,7 @@ function Payment() {
         }, {
             headers: {
             'Content-Type': 'application/json'
-        }})
+        }, withCredentials: true})
 
         const options = {
             key: "",
@@ -61,7 +62,8 @@ function Payment() {
                 }, {
                     headers: {
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    withCredentials: true
                 })
 
                 if(data?.status === "success") {

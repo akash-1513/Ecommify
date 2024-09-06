@@ -28,7 +28,8 @@ function UpdateProfile() {
       }, {
         headers: {
           'Content-Type': "multipart/form-data"
-        }
+        },
+        withCredentials: true
       });
       dispatch(login({userData: data.user}))
       setLoading(false)

@@ -24,7 +24,8 @@ function Signup() {
       }, {
         headers: {
           'Content-Type': "multipart/form-data"
-        }
+        },
+        withCredentials: true
       });
 
       setLoading(false)
